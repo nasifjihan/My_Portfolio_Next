@@ -25,7 +25,7 @@ export default function Portfolio() {
           centered
         />
 
-        <Grid className="grid-cols-3">
+        <Grid>
           {projects.map((project) => (
             <button
               key={project.id}

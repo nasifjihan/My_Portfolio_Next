@@ -144,9 +144,7 @@ export default function Contact() {
               <div className="mt-6 flex flex-1 flex-col space-y-2.5">
                 <h1 className="my-4 text-[35px] leading-[1.15]">{site.name}</h1>
                 <p className="text-base">{site.role}</p>
-                <p className="text-base leading-7">
-                  I am available for freelance work.
-                </p>
+                <p className="text-base leading-7">I am available for freelance work.</p>
                 <p className="mt-3 text-base">
                   Phone:{" "}
                   <a className="transition-colors hover:text-brand" href={`tel:${site.phone}`}>
