@@ -130,22 +130,22 @@ export default function Contact() {
       <Container>
         <SectionHeading eyebrow="CONTACT" title="Contact With Me" centered />
 
-        <div className="flex flex-col gap-8 min-[900px]:flex-row min-[900px]:items-start min-[900px]:justify-between">
-          <div className="mt-[50px] w-full min-[900px]:mt-0 min-[900px]:w-[36%]">
-            <NeoCard className="p-[30px]">
+        <div className="flex flex-col gap-8 min-[900px]:flex-row min-[900px]:items-stretch min-[900px]:justify-between min-[900px]:gap-10">
+          <div className="mt-12.5 flex w-full min-[900px]:mt-0 min-[900px]:w-[38%]">
+            <NeoCard className="flex h-full w-full flex-col p-7.5">
               <Image
                 src="/image/contact1.png"
                 alt=""
                 width={460}
                 height={288}
-                className="h-auto w-full"
+                className="h-auto w-full rounded-[10px]"
               />
 
-              <div>
-                <h1 className="my-[15px] text-[35px] leading-[1.15]">{site.name}</h1>
+              <div className="mt-6 flex flex-1 flex-col space-y-2.5">
+                <h1 className="my-4 text-[35px] leading-[1.15]">{site.name}</h1>
                 <p className="text-base">{site.role}</p>
-                <p className="text-base">
-                  I am available for freelance work. Connect with me via and call in to my account.
+                <p className="text-base leading-7">
+                  I am available for freelance work.
                 </p>
                 <p className="mt-3 text-base">
                   Phone:{" "}
@@ -163,9 +163,9 @@ export default function Contact() {
             </NeoCard>
           </div>
 
-          <NeoCard className="w-full p-6 min-[900px]:w-[60%] min-[900px]:p-[35px]">
+          <NeoCard className="h-full w-full p-6 min-[900px]:w-[58%] min-[900px]:p-[35px]">
             <form ref={formRef} onSubmit={handleSubmit} noValidate>
-              <div className="grid grid-cols-1 gap-x-[15px] sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2">
                 {FIELDS.map((field) => (
                   <Field
                     key={field.name}
@@ -190,7 +190,7 @@ export default function Contact() {
                   <textarea
                     id="message"
                     name="message"
-                    rows={10}
+                    rows={4}
                     aria-invalid={Boolean(errors.message)}
                     aria-describedby={errors.message ? "message-error" : undefined}
                     className={controlClass}

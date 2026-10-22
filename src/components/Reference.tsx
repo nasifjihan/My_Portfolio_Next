@@ -36,7 +36,7 @@ export default function Reference() {
         <SectionHeading eyebrow="REFERENCES" title="Reference" centered />
 
         <div
-          className="relative mx-auto flex min-h-[70vh] max-w-[90%] overflow-hidden min-[900px]:min-h-[500px]"
+          className="relative mx-auto flex min-h-105 max-w-[95%] overflow-hidden min-[900px]:min-h-[430px] xl:min-h-[480px] xl:max-w-[90%]"
           role="group"
           aria-roledescription="carousel"
           aria-label="Client and colleague references"
@@ -56,14 +56,14 @@ export default function Reference() {
                 aria-roledescription="slide"
                 aria-label={`${slideIndex + 1} of ${total}`}
                 className={cn(
-                  "absolute inset-0 flex size-full flex-col p-5 transition-[opacity,translate] duration-[400ms] ease-linear min-[900px]:flex-row min-[900px]:p-0",
+                  "absolute inset-0 flex size-full flex-col p-5 transition-[opacity,translate] duration-400 ease-linear min-[900px]:flex-row min-[900px]:items-center min-[900px]:p-0",
                   isActive && "translate-x-0 opacity-100",
                   !isActive && "pointer-events-none opacity-0",
                   !isActive && (isPrevious ? "-translate-x-full" : "translate-x-full"),
                 )}
               >
-                <NeoCard className="m-0 mt-[15%] flex w-full p-0 min-[900px]:m-5 min-[900px]:w-[35%] min-[900px]:p-[35px]">
-                  <div className="relative h-full min-h-[190px] w-full max-w-[190px] overflow-hidden rounded-[10px] min-[900px]:min-h-[320px] min-[900px]:max-w-none">
+                <NeoCard className="m-0 mt-[15%] flex w-full p-0 min-[900px]:m-5 min-[900px]:w-[34%] min-[900px]:self-stretch min-[900px]:p-[30px]">
+                  <div className="relative aspect-[4/5] w-full max-w-48 overflow-hidden rounded-[10px] min-[900px]:max-w-none">
                     <Image
                       src={reference.image}
                       alt={reference.name}
@@ -74,12 +74,12 @@ export default function Reference() {
                   </div>
                 </NeoCard>
 
-                <div className="m-0 w-full p-0 min-[900px]:mt-5 min-[900px]:mr-5 min-[900px]:w-[65%] min-[900px]:pl-[50px]">
+                <div className="m-0 w-full p-0 min-[900px]:mt-0 min-[900px]:mr-5 min-[900px]:w-[66%] min-[900px]:pl-10 xl:min-[900px]:pl-[50px]">
                   <div className="hidden min-[900px]:block" aria-hidden>
-                    <FaQuoteRight className="text-[clamp(56px,10vw,120px)] opacity-10" />
+                    <FaQuoteRight className="text-[clamp(50px,10vw,100px)] opacity-10" />
                   </div>
 
-                  <NeoCard className="mt-5 p-6 min-[900px]:p-[50px]">
+                  <NeoCard className="mt-3 p-6 min-[900px]:p-10 xl:min-[900px]:p-[50px]">
                     <h1 className="mb-1 text-2xl font-black text-brand">{reference.name}</h1>
                     <h3 className="text-sm leading-[22px] font-normal text-ink">
                       {reference.designation}
@@ -90,7 +90,7 @@ export default function Reference() {
                     <h3 className="text-sm leading-[22px] font-normal text-ink">
                       {reference.address}
                     </h3>
-                    <p className="mt-5 text-black">{reference.desc}</p>
+                    <p className="mt-5 leading-7 text-black">{reference.desc}</p>
                   </NeoCard>
                 </div>
               </article>

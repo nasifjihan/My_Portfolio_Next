@@ -127,8 +127,9 @@
     &::after {
       content: "";
       position: absolute;
-      inset-block: 11% 3%;
-      inset-inline-start: 0;
+      top: 78px;
+      bottom: 32px;
+      inset-inline-start: 18px;
       width: 5px;
       background: var(--color-line);
       z-index: -2;
@@ -141,10 +142,10 @@
     &::before {
       content: "";
       position: absolute;
-      top: 10.8%;
-      inset-inline-start: -10%;
-      height: 10px;
-      width: 10px;
+      top: 56px;
+      inset-inline-start: -41px;
+      height: 12px;
+      width: 12px;
       border: 5px solid var(--color-line);
       border-radius: 50%;
       background: #fff;
@@ -160,10 +161,10 @@
     &::after {
       content: "";
       position: absolute;
-      top: 13%;
-      inset-inline-start: -8%;
+      top: 60px;
+      inset-inline-start: -34px;
       height: 5px;
-      width: 40px;
+      width: 28px;
       background: var(--color-line);
     }
   }

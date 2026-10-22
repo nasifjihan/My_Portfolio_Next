@@ -25,7 +25,7 @@ export default function Portfolio() {
           centered
         />
 
-        <Grid>
+        <Grid className="grid-cols-3">
           {projects.map((project) => (
             <button
               key={project.id}
@@ -34,10 +34,11 @@ export default function Portfolio() {
               aria-haspopup="dialog"
               className={cn(
                 neoSurface,
-                "group relative block w-full reveal cursor-pointer text-left hover:bg-none",
+                "group reveal cursor-pointer text-left hover:bg-none",
+                "flex h-full w-full flex-col p-5",
               )}
             >
-              <div className="relative h-[220px] overflow-hidden rounded-[10px] min-[640px]:h-[300px]">
+              <div className="relative h-55 overflow-hidden rounded-[10px] min-[640px]:h-[260px] min-[1100px]:h-[300px]">
                 <Image
                   src={project.image}
                   alt={project.title}
@@ -47,20 +48,22 @@ export default function Portfolio() {
                 />
               </div>
 
-              <div className="flex items-center justify-between pt-[15px]">
-                <h2 className="text-2xl transition-colors duration-[350ms] group-hover:text-brand group-focus-visible:text-brand">
+              <div className="flex items-start justify-between gap-3 pt-5">
+                <h2 className="text-[22px] leading-[1.3] transition-colors duration-350 group-hover:text-brand group-focus-visible:text-brand">
                   {project.title}
                 </h2>
-                <span className="flex items-center gap-1 text-sm text-ink-muted">
+                <span className="mt-1 inline-flex shrink-0 items-center gap-1 text-sm text-ink-muted">
                   <FaHeart aria-hidden />
                   {project.totalLike}
                 </span>
               </div>
 
-              <div className="my-[10px] uppercase">
-                <span className="text-[13px] font-medium">{project.subtitle}</span>
+              <div className="mt-3 flex items-center justify-between gap-3 uppercase">
+                <span className="text-[13px] font-medium tracking-[0.08em]">
+                  {project.subtitle}
+                </span>
                 <span
-                  className="absolute right-[30px] -rotate-45 text-brand opacity-0 transition-opacity duration-[350ms] group-hover:opacity-100 group-focus-visible:opacity-100"
+                  className="shrink-0 -rotate-45 text-brand opacity-0 transition-opacity duration-350 group-hover:opacity-100 group-focus-visible:opacity-100"
                   aria-hidden
                 >
                   <FaArrowRight />
@@ -78,11 +81,11 @@ export default function Portfolio() {
         }}
       >
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-[9999] overflow-y-auto bg-surface/90" />
+          <Dialog.Overlay className="fixed inset-0 z-9999 overflow-y-auto bg-surface/90" />
           {openProject && (
             <Dialog.Content
               aria-describedby={undefined}
-              className="relative z-[10000] mx-auto my-[6vh] w-[min(85%,1100px)] rounded-[10px] bg-[#f0f3f5] p-10 leading-[1.4] shadow-neu max-[900px]:p-6"
+              className="relative z-10000 mx-auto my-[6vh] w-[min(85%,1100px)] rounded-[10px] bg-[#f0f3f5] p-10 leading-[1.4] shadow-neu max-[900px]:p-6"
             >
               <Dialog.Close asChild>
                 <NeoButton
@@ -109,7 +112,7 @@ export default function Portfolio() {
                 <div className="min-w-0 flex-1">
                   <div>
                     <Dialog.Title asChild>
-                      <h1 className="mb-[10px] text-3xl text-brand">{openProject.title}</h1>
+                      <h1 className="mb-2.5 text-3xl text-brand">{openProject.title}</h1>
                     </Dialog.Title>
                     <p className="text-[15px] text-[#555]">{openProject.description}</p>
 
@@ -125,14 +128,14 @@ export default function Portfolio() {
                     <h4 className="my-[15px_0_10px] text-2xl text-[#333]">Key Features:</h4>
                     <ul>
                       {openProject.features.map((feature) => (
-                        <li key={feature} className="mb-[5px] text-[15px] text-[#555]">
+                        <li key={feature} className="mb-1.25 text-[15px] text-[#555]">
                           - {feature}
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="mt-[22px] flex flex-wrap gap-3.5">
+                  <div className="mt-5.5 flex flex-wrap gap-3.5">
                     <NeoLink
                       href={openProject.view}
                       target="_blank"

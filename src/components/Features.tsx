@@ -16,16 +16,18 @@ export default function Features() {
           {features.map(({ id, icon: Icon, title, desc }) => (
             <NeoCard
               key={id}
-              className="group reveal p-[30px_30px_30px_40px] transition-[background,color,translate] duration-[350ms] hover:-translate-y-2.5 hover:bg-brand hover:bg-none hover:text-white"
+              className="group flex h-full reveal flex-col items-start p-8 transition-[background,color,translate] duration-[350ms] hover:-translate-y-2.5 hover:bg-brand hover:bg-none hover:text-white xl:min-h-[220px]"
             >
               <Icon
                 className="text-[34px] text-brand transition-colors duration-[350ms] group-hover:text-white"
                 aria-hidden
               />
-              <h2 className="mt-[15px] mb-[18px] text-2xl">{title}</h2>
-              <p className="transition-colors duration-[350ms]">{desc}</p>
+              <h2 className="mt-[18px] text-[26px] leading-[1.25]">{title}</h2>
+              <p className="mt-4 text-[15px] leading-7 text-ink-muted transition-colors duration-[350ms] group-hover:text-white">
+                {desc}
+              </p>
               <FaArrowRight
-                className="mt-5 text-[30px] opacity-0 transition-opacity duration-[350ms] group-hover:opacity-100"
+                className="mt-auto pt-5 text-[30px] opacity-0 transition-opacity duration-[350ms] group-hover:opacity-100"
                 aria-hidden
               />
             </NeoCard>

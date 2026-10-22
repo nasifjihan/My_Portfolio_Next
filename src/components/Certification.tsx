@@ -12,16 +12,16 @@ export default function Certification() {
       <Container>
         <SectionHeading eyebrow="MY COURSES & CERTIFICATIONS" title="Certification" centered />
 
-        <ul className="divide-y divide-gray-100">
+        <ul className="space-y-4">
           {certifications.map((item) => (
             <li
               key={`${item.name}-${item.date}`}
               className={cn(
                 neoSurface,
-                "group mb-5 flex flex-col justify-between gap-x-6 p-[30px] transition-[background,color] duration-[350ms] hover:bg-brand-soft hover:bg-none hover:text-white hover:shadow-none sm:flex-row",
+                "group flex flex-col gap-4 p-6 transition-[background,color] duration-[350ms] hover:bg-brand-soft hover:bg-none hover:text-white hover:shadow-none sm:flex-row sm:items-start sm:gap-5",
               )}
             >
-              <div className="flex min-w-0 gap-x-4">
+              <div className="flex min-w-0 shrink-0 gap-x-4">
                 <Image
                   src={item.image}
                   alt=""
@@ -31,14 +31,14 @@ export default function Certification() {
                 />
               </div>
 
-              <div className="flex grow flex-col justify-between">
-                <div className="flex flex-col justify-between md:flex-row">
+              <div className="flex grow flex-col justify-between gap-3">
+                <div className="flex flex-col justify-between gap-1 md:flex-row md:gap-4">
                   <p className="text-sm font-semibold">{item.name}</p>
-                  <p className="text-sm font-semibold">{item.company}</p>
+                  <p className="text-sm font-semibold md:text-right">{item.company}</p>
                 </div>
 
-                <div className="mt-2 flex flex-col justify-between md:flex-row">
-                  <p className="truncate text-xs text-ink-muted group-hover:text-white">
+                <div className="flex flex-col justify-between gap-2 md:flex-row md:gap-4">
+                  <p className="text-xs break-all text-ink-muted group-hover:text-white md:truncate">
                     <a href={item.link} target="_blank" rel="noopener noreferrer">
                       {item.link}
                     </a>

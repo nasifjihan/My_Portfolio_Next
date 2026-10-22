@@ -146,7 +146,7 @@ export default function Header() {
         </Container>
       </header>
 
-      <div className="fixed top-[35%] left-0 z-[800] hidden flex-col xl:flex">
+      <div className="fixed top-[35%] left-0 z-[800] hidden flex-col 2xl:flex">
         <ul>
           {socials.map(({ label, href, icon: Icon, className }) => (
             <li

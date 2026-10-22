@@ -35,7 +35,7 @@ function usePrefersReducedMotion() {
  */
 function useTypewriter(words: readonly string[], enabled: boolean) {
   const [wordIndex, setWordIndex] = useState(0);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(words[0] ?? "");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
@@ -74,18 +74,21 @@ export default function Hero() {
 
   return (
     <Section id="home" className="mt-0">
-      <Container className="grid items-center gap-y-10 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(320px,510px)] min-[900px]:gap-x-[8%]">
-        <div className="mt-16 min-[900px]:mt-20 min-[900px]:max-w-[36rem]">
+      <Container className="grid items-center gap-y-10 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(320px,430px)] min-[900px]:gap-x-[4%] min-[900px]:pt-10">
+        <div>
           <h3 className="text-base font-light tracking-[2px] uppercase">{heroCopy.eyebrow}</h3>
 
-          <h1 className="text-[clamp(2.25rem,6vw,60px)] leading-[1.15] font-bold">
+          <h1 className="text-[clamp(2rem,4.4vw,4.25rem)] leading-[1.08] font-bold">
             {heroCopy.greeting} <span className="text-brand">{site.name}</span>{" "}
-            <span className="inline-block align-middle text-[clamp(1.5rem,4vw,45px)]" aria-hidden>
+            <span
+              className="inline-block align-middle text-[clamp(1.5rem,3vw,2.75rem)]"
+              aria-hidden
+            >
               🖐️
             </span>
           </h1>
 
-          <h2 className="min-h-[1.3em] text-[clamp(1.75rem,5vw,50px)] font-bold text-brand">
+          <h2 className="mt-2 min-h-[1.35em] text-[clamp(1.5rem,3.7vw,3rem)] leading-[1.15] font-bold text-brand">
             a
             <span className="text-black" aria-hidden>
               {tagline}
@@ -94,11 +97,11 @@ export default function Hero() {
             <span className="sr-only">MERN Developer and Frontend Developer</span>
           </h2>
 
-          <p className="mt-[25px] max-w-[34rem] text-[17px] leading-[30px] text-ink-muted">
+          <p className="mt-6 max-w-[34rem] text-[17px] leading-[1.75] text-ink-muted">
             {heroCopy.intro}
           </p>
 
-          <div className="mt-2 flex flex-wrap items-start gap-x-10 gap-y-6">
+          <div className="mt-3 flex flex-wrap items-start gap-x-10 gap-y-6">
             <div>
               <h4 className={label}>{heroCopy.resumeLabel}</h4>
               <NeoLink
@@ -133,15 +136,15 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative order-first mx-auto w-full max-w-[510px] min-[900px]:order-none min-[900px]:mx-0">
-          <div className="mt-[6%] h-[54vh] w-full rounded-[10px] min-[900px]:mt-[12%] min-[900px]:h-[510px] min-[900px]:px-[50px] min-[900px]:py-5">
-            <div className="relative size-full animate-blob overflow-hidden after:absolute after:inset-0 after:shadow-[inset_0_0_0_9px_rgba(0,0,0,0.3)]">
+        <div className="relative order-first mx-auto w-full max-w-100 min-[900px]:order-0 min-[900px]:mx-0 min-[900px]:justify-self-end">
+          <div className="mt-4 aspect-square w-full min-[900px]:mt-0">
+            <div className="relative size-full animate-blob overflow-hidden shadow-neu after:absolute after:inset-[0px] after:[border-radius:inherit] after:shadow-[inset_0_0_0_7px_rgba(255,255,255,0.42)]">
               <Image
                 src="/image/nasif-hero.jpeg"
                 alt={`${site.name}, ${site.role}`}
                 fill
                 priority
-                sizes="(max-width: 900px) 100vw, 40vw"
+                sizes="(max-width: 900px) 90vw, 400px"
                 className="object-cover"
               />
             </div>
