@@ -1,26 +1,37 @@
 import { FaArrowRight } from "react-icons/fa6";
-import SectionHeading from "@/components/SectionHeading";
+import Container from "@/components/ui/Container";
+import Grid from "@/components/ui/Grid";
+import NeoCard from "@/components/ui/NeoCard";
+import Section from "@/components/ui/Section";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { features } from "@/content/features";
 
 export default function Features() {
   return (
-    <section className="features top" id="features">
-      <div className="container">
+    <Section id="features">
+      <Container>
         <SectionHeading eyebrow="Features" title="What I Do" />
 
-        <div className="content grid">
+        <Grid>
           {features.map(({ id, icon: Icon, title, desc }) => (
-            <div key={id} className="box btn_shadow reveal">
-              <Icon className="feature-icon" aria-hidden />
-              <h2>{title}</h2>
-              <p>{desc}</p>
-              <span className="feature-arrow block" aria-hidden>
-                <FaArrowRight />
-              </span>
-            </div>
+            <NeoCard
+              key={id}
+              className="group reveal p-[30px_30px_30px_40px] transition-[background,color,translate] duration-[350ms] hover:-translate-y-2.5 hover:bg-brand hover:bg-none hover:text-white"
+            >
+              <Icon
+                className="text-[34px] text-brand transition-colors duration-[350ms] group-hover:text-white"
+                aria-hidden
+              />
+              <h2 className="mt-[15px] mb-[18px] text-2xl">{title}</h2>
+              <p className="transition-colors duration-[350ms]">{desc}</p>
+              <FaArrowRight
+                className="mt-5 text-[30px] opacity-0 transition-opacity duration-[350ms] group-hover:opacity-100"
+                aria-hidden
+              />
+            </NeoCard>
           ))}
-        </div>
-      </div>
-    </section>
+        </Grid>
+      </Container>
+    </Section>
   );
 }

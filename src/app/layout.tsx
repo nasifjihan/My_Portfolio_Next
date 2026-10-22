@@ -100,8 +100,11 @@ const personJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${poppins.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
+    <html
+      lang="en"
+      className={`${poppins.variable} h-full scroll-pt-[12vh] scroll-smooth antialiased`}
+    >
+      <body className="flex min-h-full flex-col bg-surface text-ink">
         <Header />
         {children}
         <Footer />

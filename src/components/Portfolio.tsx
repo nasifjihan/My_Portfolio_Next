@@ -4,58 +4,72 @@ import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { useState } from "react";
 import { FaArrowRight, FaChevronRight, FaHeart, FaXmark } from "react-icons/fa6";
-import SectionHeading from "@/components/SectionHeading";
+import Container from "@/components/ui/Container";
+import Grid from "@/components/ui/Grid";
+import { NeoButton, NeoLink } from "@/components/ui/NeoButton";
+import { neoSurface } from "@/components/ui/NeoCard";
+import Section from "@/components/ui/Section";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { projects, type Project } from "@/content/portfolio";
+import { cn } from "@/lib/cn";
 
 export default function Portfolio() {
   const [openProject, setOpenProject] = useState<Project | null>(null);
 
   return (
-    <section className="Portfolio top" id="portfolio">
-      <div className="container">
+    <Section id="portfolio">
+      <Container>
         <SectionHeading
           eyebrow="VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK"
           title="My Portfolio"
           centered
         />
 
-        <div className="content grid">
+        <Grid>
           {projects.map((project) => (
             <button
               key={project.id}
               type="button"
-              className="box btn_shadow reveal"
               onClick={() => setOpenProject(project)}
               aria-haspopup="dialog"
+              className={cn(
+                neoSurface,
+                "group relative block w-full reveal cursor-pointer text-left hover:bg-none",
+              )}
             >
-              <div className="img">
+              <div className="relative h-[220px] overflow-hidden rounded-[10px] min-[640px]:h-[300px]">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
                   sizes="(max-width: 640px) 92vw, (max-width: 900px) 45vw, 30vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110 group-focus-visible:scale-110"
                 />
               </div>
 
-              <div className="title d_flex">
-                <h2>{project.title}</h2>
+              <div className="flex items-center justify-between pt-[15px]">
+                <h2 className="text-2xl transition-colors duration-[350ms] group-hover:text-brand group-focus-visible:text-brand">
+                  {project.title}
+                </h2>
                 <span className="flex items-center gap-1 text-sm text-ink-muted">
                   <FaHeart aria-hidden />
                   {project.totalLike}
                 </span>
               </div>
 
-              <div className="category">
-                <span>{project.subtitle}</span>
-                <span className="arrow" aria-hidden>
+              <div className="my-[10px] uppercase">
+                <span className="text-[13px] font-medium">{project.subtitle}</span>
+                <span
+                  className="absolute right-[30px] -rotate-45 text-brand opacity-0 transition-opacity duration-[350ms] group-hover:opacity-100 group-focus-visible:opacity-100"
+                  aria-hidden
+                >
                   <FaArrowRight />
                 </span>
               </div>
             </button>
           ))}
-        </div>
-      </div>
+        </Grid>
+      </Container>
 
       <Dialog.Root
         open={openProject !== null}
@@ -64,15 +78,24 @@ export default function Portfolio() {
         }}
       >
         <Dialog.Portal>
-          <Dialog.Overlay className="dialog-overlay" />
+          <Dialog.Overlay className="fixed inset-0 z-[9999] overflow-y-auto bg-surface/90" />
           {openProject && (
-            <Dialog.Content className="dialog-content" aria-describedby={undefined}>
-              <Dialog.Close className="dialog-close" aria-label="Close project">
-                <FaXmark aria-hidden />
+            <Dialog.Content
+              aria-describedby={undefined}
+              className="relative z-[10000] mx-auto my-[6vh] w-[min(85%,1100px)] rounded-[10px] bg-[#f0f3f5] p-10 leading-[1.4] shadow-neu max-[900px]:p-6"
+            >
+              <Dialog.Close asChild>
+                <NeoButton
+                  shape="circle"
+                  className="absolute top-3.5 right-3.5 text-brand hover:translate-y-0"
+                  aria-label="Close project"
+                >
+                  <FaXmark aria-hidden />
+                </NeoButton>
               </Dialog.Close>
 
-              <div className="d_flex flex-wrap gap-8">
-                <div className="dialog-media">
+              <div className="flex flex-wrap gap-8">
+                <div className="shrink-0 basis-full min-[900px]:basis-[42%]">
                   <Image
                     src={openProject.image}
                     alt={openProject.title}
@@ -84,38 +107,40 @@ export default function Portfolio() {
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <div className="project-details">
+                  <div>
                     <Dialog.Title asChild>
-                      <h1>{openProject.title}</h1>
+                      <h1 className="mb-[10px] text-3xl text-brand">{openProject.title}</h1>
                     </Dialog.Title>
-                    <p>{openProject.description}</p>
+                    <p className="text-[15px] text-[#555]">{openProject.description}</p>
 
-                    <h4>Technologies Used:</h4>
-                    <ul className="tech">
+                    <h4 className="my-[15px_0_10px] text-2xl text-[#333]">Technologies Used:</h4>
+                    <ul className="flex list-none flex-wrap p-0">
                       {openProject.technologies.map((tech) => (
-                        <li key={tech}>
-                          {tech} <span>|</span>
+                        <li key={tech} className="text-brand">
+                          {tech} <span className="mx-2 text-[#555]">|</span>
                         </li>
                       ))}
                     </ul>
 
-                    <h4>Key Features:</h4>
+                    <h4 className="my-[15px_0_10px] text-2xl text-[#333]">Key Features:</h4>
                     <ul>
                       {openProject.features.map((feature) => (
-                        <li key={feature}>- {feature}</li>
+                        <li key={feature} className="mb-[5px] text-[15px] text-[#555]">
+                          - {feature}
+                        </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="dialog-actions">
-                    <a
-                      className="btn_shadow"
+                  <div className="mt-[22px] flex flex-wrap gap-3.5">
+                    <NeoLink
                       href={openProject.view}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="font-semibold"
                     >
                       VIEW PROJECT <FaChevronRight aria-hidden />
-                    </a>
+                    </NeoLink>
                   </div>
                 </div>
               </div>
@@ -123,6 +148,6 @@ export default function Portfolio() {
           )}
         </Dialog.Portal>
       </Dialog.Root>
-    </section>
+    </Section>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa6";
+import { cn } from "@/lib/cn";
 
 const RADIUS = 22;
 
@@ -51,12 +52,15 @@ export default function ScrollToTop() {
   return (
     <button
       type="button"
-      className={`progress-wrap${isVisible ? "active-progress" : ""}`}
       onClick={scrollToTop}
       aria-label="Scroll back to top"
       tabIndex={isVisible ? 0 : -1}
+      className={cn(
+        "fixed right-4 bottom-4 z-[900] flex size-[50px] cursor-pointer items-center justify-center rounded-full bg-white shadow-[inset_0_0_0_2px_rgba(255,255,255,0.2)] transition-[opacity,visibility,translate] duration-200 min-[640px]:right-10 min-[640px]:bottom-10",
+        isVisible ? "visible translate-y-0 opacity-100" : "invisible translate-y-[15px] opacity-0",
+      )}
     >
-      <svg viewBox="0 0 50 50" aria-hidden>
+      <svg viewBox="0 0 50 50" className="absolute inset-0 size-full -rotate-90" aria-hidden>
         <circle
           cx="25"
           cy="25"
@@ -64,9 +68,13 @@ export default function ScrollToTop() {
           pathLength={1}
           strokeDasharray={1}
           strokeDashoffset={1 - progress}
+          fill="none"
+          strokeWidth={4}
+          strokeLinecap="round"
+          className="stroke-brand"
         />
       </svg>
-      <FaArrowUp className="progress-icon" aria-hidden />
+      <FaArrowUp className="relative text-[22px] text-brand" aria-hidden />
     </button>
   );
 }

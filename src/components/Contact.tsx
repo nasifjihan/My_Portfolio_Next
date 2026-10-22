@@ -1,11 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { z } from "zod";
-import SectionHeading from "@/components/SectionHeading";
+import Container from "@/components/ui/Container";
+import NeoCard from "@/components/ui/NeoCard";
+import { NeoButton } from "@/components/ui/NeoButton";
+import Section from "@/components/ui/Section";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { site } from "@/content/site";
+import { cn } from "@/lib/cn";
 
 const contactSchema = z.object({
   fullname: z.string().trim().min(2, "Please enter your name."),
@@ -22,12 +27,45 @@ type FormStatus = {
   message: string;
 };
 
-const FIELDS: { name: FieldName; label: string; type: string; autoComplete: string }[] = [
+const FIELDS: {
+  name: FieldName;
+  label: string;
+  type: string;
+  autoComplete: string;
+  fullWidth?: boolean;
+}[] = [
   { name: "fullname", label: "YOUR NAME", type: "text", autoComplete: "name" },
   { name: "phone", label: "PHONE NUMBER", type: "tel", autoComplete: "tel" },
-  { name: "email", label: "EMAIL", type: "email", autoComplete: "email" },
-  { name: "subject", label: "SUBJECT", type: "text", autoComplete: "off" },
+  { name: "email", label: "EMAIL", type: "email", autoComplete: "email", fullWidth: true },
+  { name: "subject", label: "SUBJECT", type: "text", autoComplete: "off", fullWidth: true },
 ];
+
+const controlClass =
+  "mt-1.5 mb-[13px] w-full rounded-[7px] border-[3px] border-[#e2e8ec] bg-white p-3 text-ink outline-none transition-colors focus-visible:border-brand";
+
+type FieldProps = {
+  name: string;
+  label: string;
+  error?: string;
+  fullWidth?: boolean;
+  children: ReactNode;
+};
+
+function Field({ name, label, error, fullWidth = false, children }: FieldProps) {
+  return (
+    <div className={cn("min-w-0", fullWidth && "sm:col-span-2")}>
+      <label className="block text-[13px] tracking-[1px]" htmlFor={name}>
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p className="-mt-1.5 mb-2.5 text-[13px] text-[#c81e4a]" id={`${name}-error`}>
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -88,45 +126,54 @@ export default function Contact() {
   }
 
   return (
-    <section className="Contact" id="contact">
-      <div className="top container">
+    <Section id="contact">
+      <Container>
         <SectionHeading eyebrow="CONTACT" title="Contact With Me" centered />
 
-        <div className="content d_flex">
-          <div className="left">
-            <div className="box box_shadow">
-              <div className="img">
-                <Image
-                  src="/image/contact1.png"
-                  alt=""
-                  width={460}
-                  height={288}
-                  className="h-auto w-full"
-                />
-              </div>
+        <div className="flex flex-col gap-8 min-[900px]:flex-row min-[900px]:items-start min-[900px]:justify-between">
+          <div className="mt-[50px] w-full min-[900px]:mt-0 min-[900px]:w-[36%]">
+            <NeoCard className="p-[30px]">
+              <Image
+                src="/image/contact1.png"
+                alt=""
+                width={460}
+                height={288}
+                className="h-auto w-full"
+              />
 
-              <div className="details">
-                <h1>{site.name}</h1>
-                <p>{site.role}</p>
-                <p>
+              <div>
+                <h1 className="my-[15px] text-[35px] leading-[1.15]">{site.name}</h1>
+                <p className="text-base">{site.role}</p>
+                <p className="text-base">
                   I am available for freelance work. Connect with me via and call in to my account.
                 </p>
-                <p className="mt-3">
-                  Phone: <a href={`tel:${site.phone}`}>{site.phone}</a>
+                <p className="mt-3 text-base">
+                  Phone:{" "}
+                  <a className="transition-colors hover:text-brand" href={`tel:${site.phone}`}>
+                    {site.phone}
+                  </a>
                 </p>
-                <p>
-                  Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+                <p className="text-base">
+                  Email:{" "}
+                  <a className="transition-colors hover:text-brand" href={`mailto:${site.email}`}>
+                    {site.email}
+                  </a>
                 </p>
               </div>
-            </div>
+            </NeoCard>
           </div>
 
-          <div className="right box_shadow">
+          <NeoCard className="w-full p-6 min-[900px]:w-[60%] min-[900px]:p-[35px]">
             <form ref={formRef} onSubmit={handleSubmit} noValidate>
-              <div className="f_flex gap">
-                {FIELDS.slice(0, 2).map((field) => (
-                  <div className="input row field" key={field.name}>
-                    <label htmlFor={field.name}>{field.label}</label>
+              <div className="grid grid-cols-1 gap-x-[15px] sm:grid-cols-2">
+                {FIELDS.map((field) => (
+                  <Field
+                    key={field.name}
+                    name={field.name}
+                    label={field.label}
+                    error={errors[field.name]}
+                    fullWidth={field.fullWidth}
+                  >
                     <input
                       id={field.name}
                       name={field.name}
@@ -134,62 +181,39 @@ export default function Contact() {
                       autoComplete={field.autoComplete}
                       aria-invalid={Boolean(errors[field.name])}
                       aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                      className={controlClass}
                     />
-                    {errors[field.name] && (
-                      <p className="field-error" id={`${field.name}-error`}>
-                        {errors[field.name]}
-                      </p>
-                    )}
-                  </div>
+                  </Field>
                 ))}
-              </div>
 
-              {FIELDS.slice(2).map((field) => (
-                <div className="input field" key={field.name}>
-                  <label htmlFor={field.name}>{field.label}</label>
-                  <input
-                    id={field.name}
-                    name={field.name}
-                    type={field.type}
-                    autoComplete={field.autoComplete}
-                    aria-invalid={Boolean(errors[field.name])}
-                    aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+                <Field name="message" label="YOUR MESSAGE" error={errors.message} fullWidth>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={10}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? "message-error" : undefined}
+                    className={controlClass}
                   />
-                  {errors[field.name] && (
-                    <p className="field-error" id={`${field.name}-error`}>
-                      {errors[field.name]}
-                    </p>
-                  )}
-                </div>
-              ))}
-
-              <div className="input field">
-                <label htmlFor="message">YOUR MESSAGE</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={10}
-                  aria-invalid={Boolean(errors.message)}
-                  aria-describedby={errors.message ? "message-error" : undefined}
-                />
-                {errors.message && (
-                  <p className="field-error" id="message-error">
-                    {errors.message}
-                  </p>
-                )}
+                </Field>
               </div>
 
-              <button type="submit" className="btn_shadow">
+              <NeoButton type="submit" className="w-full font-semibold tracking-[1px] text-brand">
                 SEND MESSAGE <FaArrowRight aria-hidden />
-              </button>
+              </NeoButton>
 
-              <p className="form-status" data-state={status.state} role="status" aria-live="polite">
+              <p
+                className="mt-4 data-[state=error]:text-[#c81e4a] data-[state=success]:text-[#1a7f4b]"
+                data-state={status.state}
+                role="status"
+                aria-live="polite"
+              >
                 {status.message}
               </p>
             </form>
-          </div>
+          </NeoCard>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

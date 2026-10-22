@@ -3,8 +3,13 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaQuoteRight } from "react-icons/fa6";
-import SectionHeading from "@/components/SectionHeading";
+import Container from "@/components/ui/Container";
+import NeoCard from "@/components/ui/NeoCard";
+import { NeoButton } from "@/components/ui/NeoButton";
+import Section from "@/components/ui/Section";
+import SectionHeading from "@/components/ui/SectionHeading";
 import { references } from "@/content/references";
+import { cn } from "@/lib/cn";
 
 const AUTOPLAY_MS = 3000;
 const total = references.length;
@@ -26,12 +31,12 @@ export default function Reference() {
   }, [isPaused]);
 
   return (
-    <section className="Reference" id="references">
-      <div className="container">
+    <Section id="references">
+      <Container>
         <SectionHeading eyebrow="REFERENCES" title="Reference" centered />
 
         <div
-          className="slide"
+          className="relative mx-auto flex min-h-[70vh] max-w-[90%] overflow-hidden min-[900px]:min-h-[500px]"
           role="group"
           aria-roledescription="carousel"
           aria-label="Client and colleague references"
@@ -43,18 +48,22 @@ export default function Reference() {
           {references.map((reference, slideIndex) => {
             const isActive = slideIndex === index;
             const isPrevious = slideIndex === (index - 1 + total) % total;
-            const position = isActive ? "activeSlide" : isPrevious ? "lastSlide" : "nextSlide";
 
             return (
               <article
                 key={reference.id}
-                className={`d_flex ${position}`}
                 aria-hidden={!isActive}
                 aria-roledescription="slide"
                 aria-label={`${slideIndex + 1} of ${total}`}
+                className={cn(
+                  "absolute inset-0 flex size-full flex-col p-5 transition-[opacity,translate] duration-[400ms] ease-linear min-[900px]:flex-row min-[900px]:p-0",
+                  isActive && "translate-x-0 opacity-100",
+                  !isActive && "pointer-events-none opacity-0",
+                  !isActive && (isPrevious ? "-translate-x-full" : "translate-x-full"),
+                )}
               >
-                <div className="left box_shadow">
-                  <div className="img">
+                <NeoCard className="m-0 mt-[15%] flex w-full p-0 min-[900px]:m-5 min-[900px]:w-[35%] min-[900px]:p-[35px]">
+                  <div className="relative h-full min-h-[190px] w-full max-w-[190px] overflow-hidden rounded-[10px] min-[900px]:min-h-[320px] min-[900px]:max-w-none">
                     <Image
                       src={reference.image}
                       alt={reference.name}
@@ -63,45 +72,51 @@ export default function Reference() {
                       className="object-cover"
                     />
                   </div>
-                </div>
+                </NeoCard>
 
-                <div className="right">
-                  <div className="quote" aria-hidden>
-                    <FaQuoteRight />
+                <div className="m-0 w-full p-0 min-[900px]:mt-5 min-[900px]:mr-5 min-[900px]:w-[65%] min-[900px]:pl-[50px]">
+                  <div className="hidden min-[900px]:block" aria-hidden>
+                    <FaQuoteRight className="text-[clamp(56px,10vw,120px)] opacity-10" />
                   </div>
 
-                  <div className="content box_shadow">
-                    <h1>{reference.name}</h1>
-                    <h3>{reference.designation}</h3>
-                    <h3>{reference.company}</h3>
-                    <h3>{reference.address}</h3>
-                    <p>{reference.desc}</p>
-                  </div>
+                  <NeoCard className="mt-5 p-6 min-[900px]:p-[50px]">
+                    <h1 className="mb-1 text-2xl font-black text-brand">{reference.name}</h1>
+                    <h3 className="text-sm leading-[22px] font-normal text-ink">
+                      {reference.designation}
+                    </h3>
+                    <h3 className="text-sm leading-[22px] font-normal text-ink">
+                      {reference.company}
+                    </h3>
+                    <h3 className="text-sm leading-[22px] font-normal text-ink">
+                      {reference.address}
+                    </h3>
+                    <p className="mt-5 text-black">{reference.desc}</p>
+                  </NeoCard>
                 </div>
               </article>
             );
           })}
 
-          <div className="slide_button">
-            <button
-              type="button"
-              className="btn_shadow"
+          <div className="absolute top-3 right-3 z-10 flex gap-[30px] min-[900px]:top-[30px] min-[900px]:right-[30px]">
+            <NeoButton
+              shape="circle"
               onClick={() => goTo(index - 1)}
               aria-label="Previous reference"
+              className="text-brand"
             >
               <FaArrowLeft aria-hidden />
-            </button>
-            <button
-              type="button"
-              className="btn_shadow"
+            </NeoButton>
+            <NeoButton
+              shape="circle"
               onClick={() => goTo(index + 1)}
               aria-label="Next reference"
+              className="text-brand"
             >
               <FaArrowRight aria-hidden />
-            </button>
+            </NeoButton>
           </div>
         </div>
-      </div>
-    </section>
+      </Container>
+    </Section>
   );
 }

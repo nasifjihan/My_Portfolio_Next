@@ -81,7 +81,7 @@ export const socials: SocialLink[] = [
     label: "Email",
     href: "mailto:nasifzeehan1@gmail.com",
     icon: HiOutlineMail,
-    className: "bg-[#6fc2b0]",
+    className: "bg-teal-700",
   },
 ];
 
