@@ -18,7 +18,7 @@ export default function Certification() {
               key={`${item.name}-${item.date}`}
               className={cn(
                 neoSurface,
-                "group flex flex-col gap-4 p-6 transition-[background,color] duration-[350ms] hover:bg-brand-soft hover:bg-none hover:text-white hover:shadow-none sm:flex-row sm:items-start sm:gap-5",
+                "group duration-350ms flex flex-col gap-4 p-6 transition-[background,color] hover:bg-brand-soft hover:bg-none hover:text-white hover:shadow-none sm:flex-row sm:items-start sm:gap-5",
               )}
             >
               <div className="flex min-w-0 shrink-0 gap-x-4">

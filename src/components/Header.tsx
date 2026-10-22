@@ -49,13 +49,13 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-[1000] h-[10vh] min-h-[74px] bg-surface transition-[height,box-shadow] duration-[350ms]",
+          "duration-350ms sticky top-0 z-1000 h-[10vh] min-h-18 bg-surface transition-[height,box-shadow]",
           isScrolled && "h-[12vh] shadow-header max-[980px]:h-[10vh]",
         )}
       >
         <Container className="flex h-full items-center justify-between">
           <a
-            className="block w-[50px] shrink-0 cursor-pointer"
+            className="block w-12 shrink-0 cursor-pointer"
             href="#home"
             aria-label={`${site.name} — home`}
           >
@@ -73,20 +73,20 @@ export default function Header() {
             <nav aria-label="Primary">
               <ul className="hidden items-center uppercase min-[980px]:flex">
                 {navLinks.map((link) => (
-                  <li key={link.href} className="ml-[30px]">
+                  <li key={link.href} className="ml-7.5">
                     <a
                       href={link.href}
                       data-active={activeId === link.href.slice(1)}
                       aria-current={activeId === link.href.slice(1) ? "true" : undefined}
-                      className="text-[13px] font-medium tracking-[1px] transition-colors duration-[350ms] hover:text-brand data-[active=true]:text-brand"
+                      className="duration-350ms text-[13px] font-medium tracking-[1px] transition-colors hover:text-brand data-[active=true]:text-brand"
                     >
                       {link.label}
                     </a>
                   </li>
                 ))}
-                <li className="ml-[30px]">
+                <li className="ml-7.5">
                   <NeoLink
-                    className="h-fit px-5 py-[15px] text-[13px] text-brand hover:translate-y-0"
+                    className="h-fit px-5 py-4 text-[13px] text-brand hover:translate-y-0"
                     href={site.resumeUrl}
                     download
                     aria-label="Download resume as PDF"
@@ -107,10 +107,10 @@ export default function Header() {
               </Dialog.Trigger>
 
               <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 z-[1100] bg-black/25" />
+                <Dialog.Overlay className="fixed inset-0 z-1100 bg-black/25" />
                 <Dialog.Content
                   aria-describedby={undefined}
-                  className="fixed inset-y-0 left-0 z-[1200] w-[min(50%,320px)] bg-white pt-[30px] shadow-2xl"
+                  className="fixed inset-y-0 left-0 z-1200 w-[min(50%,320px)] bg-white pt-7.5 shadow-2xl"
                 >
                   <Dialog.Title className="sr-only">Site navigation</Dialog.Title>
                   <Dialog.Close asChild>
@@ -126,13 +126,13 @@ export default function Header() {
                   <nav aria-label="Mobile">
                     <ul className="uppercase">
                       {navLinks.map((link) => (
-                        <li key={link.href} className="w-full px-5 leading-[60px]">
+                        <li key={link.href} className="w-full px-5 leading-15">
                           <a href={link.href} onClick={() => setIsMenuOpen(false)}>
                             {link.label}
                           </a>
                         </li>
                       ))}
-                      <li className="w-full px-5 leading-[60px]">
+                      <li className="w-full px-5 leading-15">
                         <a href={site.resumeUrl} download onClick={() => setIsMenuOpen(false)}>
                           resume (pdf)
                         </a>
@@ -146,13 +146,13 @@ export default function Header() {
         </Container>
       </header>
 
-      <div className="fixed top-[35%] left-0 z-[800] hidden flex-col 2xl:flex">
+      <div className="fixed top-[35%] left-0 z-800 hidden flex-col 2xl:flex">
         <ul>
           {socials.map(({ label, href, icon: Icon, className }) => (
             <li
               key={label}
               className={cn(
-                "-ml-[100px] flex h-[60px] w-[160px] items-center justify-between p-4 transition-[margin] duration-300 ease-out focus-within:ml-[-5px] hover:ml-[-5px]",
+                "-ml-25 flex h-15 w-40 items-center justify-between p-4 transition-[margin] duration-300 ease-out focus-within:-ml-1.25 hover:-ml-1.25",
                 className,
               )}
             >

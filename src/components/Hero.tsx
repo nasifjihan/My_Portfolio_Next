@@ -138,7 +138,7 @@ export default function Hero() {
 
         <div className="relative order-first mx-auto w-full max-w-100 min-[900px]:order-0 min-[900px]:mx-0 min-[900px]:justify-self-end">
           <div className="mt-4 aspect-square w-full min-[900px]:mt-0">
-            <div className="relative size-full animate-blob overflow-hidden shadow-neu after:absolute after:inset-[0px] after:[border-radius:inherit] after:shadow-[inset_0_0_0_7px_rgba(255,255,255,0.42)]">
+            <div className="relative size-full animate-blob overflow-hidden shadow-neu after:absolute after:inset-0 after:rounded-[inherit] after:shadow-[inset_0_0_0_7px_rgba(255,255,255,0.42)]">
               <Image
                 src="/image/nasif-hero.jpeg"
                 alt={`${site.name}, ${site.role}`}

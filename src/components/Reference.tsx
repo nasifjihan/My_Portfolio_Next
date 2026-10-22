@@ -36,7 +36,7 @@ export default function Reference() {
         <SectionHeading eyebrow="REFERENCES" title="Reference" centered />
 
         <div
-          className="relative mx-auto flex min-h-105 max-w-[95%] overflow-hidden min-[900px]:min-h-[430px] xl:min-h-[480px] xl:max-w-[90%]"
+          className="relative mx-auto flex min-h-105 max-w-[95%] overflow-hidden min-[900px]:min-h-[430px] xl:min-h-120 xl:max-w-[90%]"
           role="group"
           aria-roledescription="carousel"
           aria-label="Client and colleague references"
@@ -63,7 +63,7 @@ export default function Reference() {
                 )}
               >
                 <NeoCard className="m-0 mt-[15%] flex w-full p-0 min-[900px]:m-5 min-[900px]:w-[34%] min-[900px]:self-stretch min-[900px]:p-[30px]">
-                  <div className="relative aspect-[4/5] w-full max-w-48 overflow-hidden rounded-[10px] min-[900px]:max-w-none">
+                  <div className="relative aspect-4/5 w-full max-w-48 overflow-hidden rounded-[10px] min-[900px]:max-w-none">
                     <Image
                       src={reference.image}
                       alt={reference.name}
@@ -81,13 +81,13 @@ export default function Reference() {
 
                   <NeoCard className="mt-3 p-6 min-[900px]:p-10 xl:min-[900px]:p-[50px]">
                     <h1 className="mb-1 text-2xl font-black text-brand">{reference.name}</h1>
-                    <h3 className="text-sm leading-[22px] font-normal text-ink">
+                    <h3 className="text-sm leading-5.5 font-normal text-ink">
                       {reference.designation}
                     </h3>
-                    <h3 className="text-sm leading-[22px] font-normal text-ink">
+                    <h3 className="text-sm leading-5.5 font-normal text-ink">
                       {reference.company}
                     </h3>
-                    <h3 className="text-sm leading-[22px] font-normal text-ink">
+                    <h3 className="text-sm leading-5.5 font-normal text-ink">
                       {reference.address}
                     </h3>
                     <p className="mt-5 leading-7 text-black">{reference.desc}</p>
@@ -97,7 +97,7 @@ export default function Reference() {
             );
           })}
 
-          <div className="absolute top-3 right-3 z-10 flex gap-[30px] min-[900px]:top-[30px] min-[900px]:right-[30px]">
+          <div className="absolute top-3 right-3 z-10 flex gap-7.5 min-[900px]:top-[30px] min-[900px]:right-[30px]">
             <NeoButton
               shape="circle"
               onClick={() => goTo(index - 1)}

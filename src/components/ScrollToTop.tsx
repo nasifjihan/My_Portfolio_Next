@@ -6,11 +6,6 @@ import { cn } from "@/lib/cn";
 
 const RADIUS = 22;
 
-/**
- * Scroll-to-top control with a progress ring.
- * The original used jQuery + an `index.html` inline script; this is a single
- * dependency-free React component driven by one rAF-throttled scroll listener.
- */
 export default function ScrollToTop() {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -56,8 +51,8 @@ export default function ScrollToTop() {
       aria-label="Scroll back to top"
       tabIndex={isVisible ? 0 : -1}
       className={cn(
-        "fixed right-4 bottom-4 z-[900] flex size-[50px] cursor-pointer items-center justify-center rounded-full bg-white shadow-[inset_0_0_0_2px_rgba(255,255,255,0.2)] transition-[opacity,visibility,translate] duration-200 min-[640px]:right-10 min-[640px]:bottom-10",
-        isVisible ? "visible translate-y-0 opacity-100" : "invisible translate-y-[15px] opacity-0",
+        "fixed right-4 bottom-4 z-900 flex size-12.5 cursor-pointer items-center justify-center rounded-full bg-white shadow-[inset_0_0_0_2px_rgba(255,255,255,0.2)] transition-[opacity,visibility,translate] duration-200 min-[640px]:right-10 min-[640px]:bottom-10",
+        isVisible ? "visible translate-y-0 opacity-100" : "invisible translate-y-3.75 opacity-0",
       )}
     >
       <svg viewBox="0 0 50 50" className="absolute inset-0 size-full -rotate-90" aria-hidden>

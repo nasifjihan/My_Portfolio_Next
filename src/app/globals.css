@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------
-   Design tokens
-   The original theme repeated these literals across ten stylesheets
-   (`#ff014f`, the neumorphic shadow pair, `#ecf0f3`). They now live in
-   one place and are exposed as Tailwind utilities.
-   ------------------------------------------------------------------ */
 @theme {
   --color-brand: #ff014f;
   --color-brand-soft: #ff3a75;
@@ -15,10 +9,8 @@
   --color-line: #d9dee2;
 
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-
   --shadow-neu: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
   --shadow-header: -1px 11px 24px -11px rgb(0 0 0 / 0.75);
-
   --animate-blob: blob 8s ease-in-out infinite 1s;
   --animate-caret: caret 1s steps(2, start) infinite;
 
@@ -42,9 +34,6 @@
 }
 
 @layer base {
-  /* Tailwind's preflight flattens heading sizes and weights. The design leans
-     on the browser defaults, so restore them here; the `text-*` utilities on
-     individual headings still win because this layer is emitted first. */
   h1,
   h2,
   h3,
@@ -54,20 +43,16 @@
     font-weight: 600;
     line-height: 1.25;
   }
-
   h1 {
     font-size: 2rem;
   }
-
   h2 {
     font-size: 1.5rem;
   }
-
   h3 {
     font-size: 1.17rem;
   }
 
-  /* A single visible focus ring for every interactive element. */
   :focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 3px;
@@ -85,18 +70,12 @@
   }
 }
 
-/* Unlayered so it beats the `scroll-smooth` utility, which lives in the
-   higher-priority utilities layer. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
   }
 }
 
-/* ------------------------------------------------------------------
-   Scroll-driven reveal. Pure progressive enhancement: browsers without
-   `animation-timeline: view()` render the element statically.
-   ------------------------------------------------------------------ */
 @utility reveal {
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
@@ -118,10 +97,6 @@
   }
 }
 
-/* ------------------------------------------------------------------
-   Resume timeline. Decorative pseudo-element graphics; expressing them
-   as utilities would bury the markup in twenty-odd variants.
-   ------------------------------------------------------------------ */
 @utility timeline-rail {
   @media (width >= 900px) {
     &::after {
@@ -153,7 +128,6 @@
       transition: background 0.35s ease;
     }
 
-    /* Picks up the card's own hover tint. */
     &:hover::before {
       background: var(--color-brand-soft);
     }
